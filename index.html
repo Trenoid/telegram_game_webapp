@@ -6,20 +6,32 @@
     <title>Test POST Request</title>
 </head>
 <body>
-    <div id="form">
-        <h1 id="greeting">Hello222!</h1>
-        <form id="scoreForm">
-            <label for="user_id">User22 ID:</label>
-            <input type="number" id="user_id" name="user_id" required><br><br>
+    <h1>Send Test Score</h1>
+    <form id="scoreForm">
+        <label for="user_id">User222 ID:</label>
+        <input type="number" id="user_id" name="user_id" required><br><br>
 
-            <label for="score">Score:</label>
-            <input type="number" id="score" name="score" required><br><br>
+        <label for="score">Score:</label>
+        <input type="number" id="score" name="score" required><br><br>
 
-            <button type="submit" id="submit">Submit Score</button>
-        </form>
-    </div>
+        <button type="submit" id="submit">Submit Score</button>
+    </form>
 
     <script>
+        // Функция для получения параметров URL
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                user_id: params.get('user_id')
+            };
+        }
+
+        // Автоматически заполняем форму при загрузке страницы
+        window.onload = function() {
+            const params = getUrlParams();
+            document.getElementById('user_id').value = params.user_id;
+        };
+
         document.getElementById("scoreForm").addEventListener("submit", async function(event) {
             event.preventDefault();
 
